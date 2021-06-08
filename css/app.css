@@ -1,0 +1,61 @@
+.grid{
+    display: flex;
+    flex-wrap: wrap;
+    width: 560px;
+    height: 560px;
+    border:1px solid ;
+}
+
+.grid div{
+    width: 20px;
+    height: 20px;
+}
+
+.pac-dot{
+    background-color: rgb(34, 230, 27);
+    border: 7px solid rgb(23, 27, 23);
+    box-sizing: border-box;
+}
+
+.wall{
+    background-color: darkslategray;
+}
+
+.power-pellet{
+    background-color: red;
+    border-radius: 10px;
+}
+
+.pac-man{
+    background-color: yellow;
+    border: none;
+    border-radius: 10px;
+}
+
+.ghost-lair{
+    background-color: rgb(202, 36, 36);
+}
+
+.gasparin{
+    background-color: aqua;
+    border: 0px;
+}
+
+.pat{
+    background-color: chartreuse;
+    border: 0px;
+}
+.beky{
+    background-color: palevioletred;
+    border: 0px;
+}
+
+.lucky{
+    background-color: rebeccapurple;
+    border: 0px;
+}
+
+.scared-ghost{
+    background-color: yellowgreen;
+    border: 0px;
+}
