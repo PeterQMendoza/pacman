@@ -1,4 +1,5 @@
 .grid{
+    background-color: black;
     display: flex;
     flex-wrap: wrap;
     width: 560px;
@@ -11,51 +12,149 @@
     height: 20px;
 }
 
-.pac-dot{
+.puntos-pacman{
     background-color: rgb(34, 230, 27);
-    border: 7px solid rgb(23, 27, 23);
+    border: 7px solid black;
+    /* border-radius: 10px; */
     box-sizing: border-box;
 }
 
-.wall{
+.pared{
     background-color: darkslategray;
+    border: 1px solid gray;
+    box-sizing: border-box;
 }
 
-.power-pellet{
+.bola-poder{
     background-color: red;
     border-radius: 10px;
+    border: 1px solid orange;
+    box-sizing: border-box;
 }
 
-.pac-man{
-    background-color: yellow;
-    border: none;
-    border-radius: 10px;
+.portal{
+    background-color: blanchedalmond;
+    border-radius: 5px;
 }
 
-.ghost-lair{
-    background-color: rgb(202, 36, 36);
+
+.pm-rotate0{
+    transform: rotate(0deg);
 }
 
-.gasparin{
+.pm-rotate90{
+    transform: rotate(90deg);
+}
+
+.pm-rotate180{
+    transform: rotate(180deg);
+}
+
+.pm-rotate270{
+    transform: rotate(270deg);
+}
+
+.pacman{
+    top: 50%;
+    box-sizing: border-box;
+    z-index: 99;
+}
+
+.pacman::after,.pacman::before{
+    content: "";
+    display: block;
+    height: 0;
+    width: 0;
+    border: 10px solid yellow;
+    margin-top: 0px;
+    border-radius: 50%;
+    animation:superior 0.5s ease-in-out infinite;
+}
+
+@keyframes superior {
+    0%{
+        border-right-color: transparent;
+    }
+    50%{
+        border-right-color: transparent;
+    }
+    100%{
+        border-right-color: yellow;
+    }
+}
+
+.pacman::after{
+    margin-left: 0px;
+    margin-top: -20px;
+    animation:inferior 0.5s ease-in-out infinite;
+}
+@keyframes inferior {
+    0%{
+        border-right-color: transparent;
+    }
+    50%{
+        border-right-color: transparent;
+    }
+    100%{
+        border-right-color: yellow;
+    }
+}
+
+
+.fantasma{
+    position: relative;
+    width: 0;
+    height: 0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-top: -3px;
+}
+
+
+.fantasma::before,.fantasma::after{
+    content: "";
+    background: blue;
+    position: absolute;
+    height: 6px;
+    width: 5px;
+    border-radius: 100%;
+    border-top: 2px solid white;
+    border-left: 1px solid white;
+    border-right: 2px solid white;
+    border-bottom: 1px solid white;
+    top: 4px;
+    left: 3px;
+    box-sizing: border-box;
+}
+
+.fantasma::after{
+    left: 10px;
+}
+
+
+.guarida-fantasma{
+    background-color: rgb(70, 47, 47);
+}
+
+.grito-fantasma{
     background-color: aqua;
     border: 0px;
 }
-
-.pat{
-    background-color: chartreuse;
+.clyde{
+    background-color: yellow;
     border: 0px;
 }
-.beky{
+
+.inky{
+    background-color: blue;
+    border: 0px;
+}
+.pinky{
     background-color: palevioletred;
     border: 0px;
 }
 
-.lucky{
-    background-color: rebeccapurple;
-    border: 0px;
-}
-
-.scared-ghost{
-    background-color: yellowgreen;
+.blinky{
+    background-color: red;
     border: 0px;
 }

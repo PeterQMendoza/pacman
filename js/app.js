@@ -1,248 +1,334 @@
 document.addEventListener('DOMContentLoaded',()=>{
+    // definicion de variables
     const grid=document.querySelector('.grid');
     const scoreDisplay=document.getElementById('score');
-    const width=28;//28x28=784;
+    const width=28;
     let score=0;
-
-    // Capa de grilla y que estan en los cuadrados
+    
+    //Crear la pizarra
     const layout=[
         1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-        1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-        1,0,1,1,1,1,0,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,1,0,1,
-        1,0,1,1,1,1,0,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,1,0,1,
-        1,0,1,1,1,1,0,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,1,0,1,
-        1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-        1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
-        1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
-        1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
-        1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-        1,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,1,0,1,
-        1,1,1,1,1,0,1,1,4,4,4,4,4,4,4,4,4,4,1,1,0,1,1,1,1,1,0,1,
-        1,0,0,0,0,0,1,1,4,1,1,1,2,2,1,1,1,4,1,1,0,0,0,0,0,0,0,1,
-        1,1,1,1,1,0,1,1,4,1,2,2,2,2,2,2,1,4,1,1,0,1,1,1,1,1,1,1,
-        1,1,1,1,1,0,1,1,4,1,2,2,2,2,2,2,1,4,1,1,0,1,1,1,1,1,1,1,
-        1,1,1,1,1,0,1,1,4,1,2,2,2,2,2,2,1,4,1,1,0,1,1,1,1,1,1,1,
-        1,4,4,4,4,0,0,0,4,1,1,1,1,1,1,1,1,4,0,0,0,0,0,0,0,0,0,1,
-        1,1,1,1,1,0,1,1,4,1,1,1,1,1,1,1,1,4,1,1,0,1,1,1,1,1,1,1,
-        1,1,1,1,1,0,1,1,4,4,4,4,4,4,4,4,4,4,1,1,0,1,1,1,1,1,1,1,
-        1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,
-        1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,1,
-        1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,
-        1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,
-        1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,
-        1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-        1,0,1,1,1,1,1,0,1,1,1,1,1,0,1,1,1,1,1,0,1,1,1,1,1,1,0,1,
-        1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+        1,3,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,3,1,
+        1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1,
+        1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1,
+        1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,
+        1,0,1,1,1,1,0,1,1,1,1,1,0,0,0,0,1,1,1,1,1,0,1,1,1,1,0,1,
+        1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1,
+        1,0,0,0,0,0,0,1,0,0,0,0,0,1,1,0,0,0,0,0,1,0,0,0,0,0,0,1,
+        1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,
+        1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,
+        1,0,1,1,1,1,0,0,0,1,1,1,1,0,0,1,1,1,1,0,0,0,1,1,1,1,0,1,
+        1,0,1,1,1,1,1,0,1,1,1,1,1,0,0,1,1,1,1,1,0,1,1,1,1,1,0,1,
+        1,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,1,
+        1,0,0,0,0,0,0,1,1,1,1,1,1,2,2,1,1,1,1,1,1,0,0,0,0,0,0,1,
+        1,1,1,1,1,1,0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,1,1,1,1,1,1,
+        1,1,1,1,1,1,0,1,1,2,2,2,2,2,2,2,2,2,2,1,1,0,1,1,1,1,1,1,
+        1,5,4,4,4,0,0,1,1,2,2,2,2,2,2,2,2,2,2,1,1,0,0,4,4,4,5,1,
+        1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,
+        1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,
+        1,1,1,1,1,1,0,1,1,3,1,0,0,0,1,0,1,3,0,1,1,0,1,1,1,1,1,1,
+        1,0,0,0,0,0,0,1,1,0,1,0,1,0,0,0,0,1,0,1,1,0,0,0,0,0,0,1,
+        1,0,1,1,1,0,1,1,1,0,1,0,1,1,0,1,0,1,0,1,1,1,0,1,1,1,0,1,
+        1,0,1,3,1,0,1,1,1,0,0,0,1,0,0,1,0,0,0,1,1,1,0,1,3,1,0,1,
+        1,0,1,0,1,0,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,0,1,0,1,0,1,
+        1,0,1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,1,0,1,
+        1,0,1,1,1,1,0,1,1,0,1,0,1,1,1,1,0,1,0,1,1,0,1,1,1,1,0,1,
+        1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,
         1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
-    ]
-
-    const squares=[]
-    // legend
-    // 0->pac-dot
-    // 1->wall
-    // 2->ghost -lair
-    // 3->power-peller
-    // 4->empty
-
-
-    // Dibujar el grid
+    ];
+    //Leyenda de la pizarra
+    // 0->puntos pacman
+    // 1->pared
+    // 2->guarida de fantasamas
+    // 3->bolas de poder
+    // 4->vacio
+    // 5->portal
+    const squares=[];//div de cada capa
     function crearPizarra()
     {
-        for (let i=0 ; i < layout.length; i++) {
-            const square=document.createElement('div');
+        for (let i = 0; i < layout.length; i++) {
+            const square = document.createElement('div');
             grid.appendChild(square);
             squares.push(square);
-
-            //agregar layout en el apizarra
-            if(layout[i]===0){
-                squares[i].classList.add('pac-dot')
-            }else if(layout[i]===1){
-                squares[i].classList.add('wall')
-            }else if(layout[i]===2){
-                squares[i].classList.add('ghost-lair')
-            }else if(layout[i]===3){
-                squares[i].classList.add('power-pellet')
+            //asignar la capa(layout) a la pizarra
+            if(layout[i]===0)
+            {
+                squares[i].classList.add('puntos-pacman');
+            }
+            else if(layout[i]===1)
+            {
+                squares[i].classList.add('pared');
+            }
+            else if(layout[i]===2)
+            {
+                squares[i].classList.add('guarida-fantasma');
+            }
+            else if(layout[i]===3)
+            {
+                squares[i].classList.add('bola-poder');
+            }
+            else if(layout[i]===5)
+            {
+                squares[i].classList.add('portal');
             }
         }
     }
-
     crearPizarra();
-
-    let pacmanCurrentIndex=450
-    squares[pacmanCurrentIndex].classList.add('pac-man');
-
-    function movePacman(e){
-        squares[pacmanCurrentIndex].classList.remove('pac-man')
-        
-        switch(e.keyCode){
-            case 37:
-                if(pacmanCurrentIndex%width!==0 && 
-                    !squares[pacmanCurrentIndex-1].classList.contains('wall')&&
-                    !squares[pacmanCurrentIndex-1].classList.contains('ghost-lair'))
-                    {
-                        pacmanCurrentIndex-=1;
-
-                    }
-                if((pacmanCurrentIndex-1)===448)
-                {
-                    pacmanCurrentIndex=474;
-                }
-                break;
-            case 38:
-                if(pacmanCurrentIndex-width>=0 &&
-                    !squares[pacmanCurrentIndex-width].classList.contains('wall')&&
-                    !squares[pacmanCurrentIndex-width].classList.contains('ghost-lair'))
-                    {
-                        pacmanCurrentIndex-=width;
-                    }
-                break;
-            case 39:
-                if(pacmanCurrentIndex%width<width-1 &&
-                    !squares[pacmanCurrentIndex+1].classList.contains('wall')&&
-                    !squares[pacmanCurrentIndex+1].classList.contains('ghost-lair'))
-                    {
-                        pacmanCurrentIndex+=1;
-                    }
-                if((pacmanCurrentIndex+1)===475)
-                {
-                    pacmanCurrentIndex=449;
-                }
-                break;
-            case 40:
-                if(pacmanCurrentIndex+width<width*width &&
-                    !squares[pacmanCurrentIndex+width].classList.contains('wall')&&
-                    !squares[pacmanCurrentIndex+width].classList.contains('ghost-lair'))
-                    {
-                        pacmanCurrentIndex+=width;
-                    }
-                break;
-        }
-
-        squares[pacmanCurrentIndex].classList.add('pac-man')
-
-
-        pacmandotEaten()
-        powerPelletEaten()
-        checkForGameOver()
-        checkForWin()
-    }
-
-    document.addEventListener('keyup',movePacman);
-
-
-    //que sucede cuando pacman come pac-dot
-    function pacmandotEaten(){
-        if(squares[pacmanCurrentIndex].classList.contains('pac-dot')){
-            score++;
-            scoreDisplay.innerHTML=score;
-            squares[pacmanCurrentIndex].classList.remove('pac-dot');
-        }
-    }
-
-    // Que sucede si pacman come power/pellet
-    function powerPelletEaten(){
-        if(squares[pacmanCurrentIndex].classList.contains('power-pellet')){
-            score+=10;
-            ghosts.forEach(ghost=>ghost.isScared=true);
-            setTimeout(unScaredGhost,10000);
-            squares[pacmanCurrentIndex].classList.remove('power-pellet');
-        }
-    }
-
-    function unScaredGhost(){
-        ghosts.forEach(ghost=>ghost.isScared=false);
-    }
-
-    //crear nuestro plantilla ghost
-    class Ghost{
-        constructor(ClassName,startIndex,speed){
-            this.ClassName=ClassName;
+    
+    //definicion de las clase fantasma
+    class Person{
+        constructor(className,startIndex,speed){
+            this.className=className;
             this.startIndex=startIndex;
             this.speed=speed;
             this.currentIndex=startIndex;
             this.timerId=NaN;
+            
+        }
+
+        obtenerCoordenadas()
+        {
+            return [this.currentIndex%width,Math.floor(this.currentIndex/width)];
+        }
+        obtenerCoordenadasNuevas(direction)
+        {
+            return [(this.currentIndex+direction)%width,Math.floor((this.currentIndex+direction)/width)];
+        }
+    }
+    
+    class Ghost extends Person{
+        constructor(className,startIndex,speed)
+        {
+            // llamar al constructor de la clase base antes de usar this
+            super(className,startIndex,speed);
             this.isScared=false;
         }
     }
-
+    //crear fantasmas
     ghosts=[
-        new Ghost('gasparin',375,1300),
-        new Ghost('pat',378,850),
-        new Ghost('beky',403,500),
-        new Ghost('lucky',406,700)
+        new Ghost('clyde',401,190),
+        new Ghost('inky',410,170),
+        new Ghost('pinky',457,150),
+        new Ghost('blinky',466,210)
     ]
+    
+    class Pacman extends Person{
+        
+    }
+    // crear pacman
+    var pacman=new Pacman('pacman',473,500);
 
-    //dibujar los fantasmas
-    ghosts.forEach(ghost => {
-        squares[ghost.currentIndex].classList.add(ghost.ClassName);
-        squares[ghost.currentIndex].classList.add('ghost');
-    });
+    function moverPacman(e) {
+        squares[pacman.currentIndex].classList.remove('pacman');
+        squares[pacman.currentIndex].classList.remove('pm-rotate0','pm-rotate90','pm-rotate180','pm-rotate270');
+        let dirX=0;
+        let dirY=0;
+        switch (e.keyCode) {
+            case 37:
+                if(pacman.currentIndex%width!==0 &&
+                    !squares[pacman.currentIndex-1].classList.contains('pared')&&
+                    !squares[pacman.currentIndex-1].classList.contains('guarida-fantasma'))
+                    {
+                        pacman.currentIndex-=1;
+                    }
+                    if((pacman.currentIndex-1)===448)
+                    {
+                        pacman.currentIndex=474;
+                    }
+                    dirX=-1;
+                break;
+            case 38:
+                if(pacman.currentIndex-width>=0 &&
+                    !squares[pacman.currentIndex-width].classList.contains('pared')&&
+                    !squares[pacman.currentIndex-width].classList.contains('guarida-fantasma'))
+                    {
+                        pacman.currentIndex-=width;
+                    }
+                    dirY=+1;
+                break;
+            case 39:
+                if(pacman.currentIndex%width<width-1 &&
+                    !squares[pacman.currentIndex+1].classList.contains('pared')&&
+                    !squares[pacman.currentIndex+1].classList.contains('guaridad-fantasma'))
+                    {
+                        pacman.currentIndex+=1;
+                    }
+                    if((pacman.currentIndex+1)===475)
+                    {
+                        pacman.currentIndex=449;
+                    }
+                    dirX=1;
+                break;
+            case 40:
+                if(pacman.currentIndex+width<width*width &&
+                    !squares[pacman.currentIndex+width].classList.contains('pared')&&
+                    !squares[pacman.currentIndex+width].classList.contains('guarida-fantasma'))
+                    {
+                        pacman.currentIndex+=width;
+                    }
+                    dirY=-1;
+                break;
+        }
+        squares[pacman.currentIndex].classList.add('pacman');
 
-    // Mover los fantasma de forma aleatoria
-    ghosts.forEach(ghost=>moverGhost(ghost));
+        switch (dirX) {
+            case -1:
+                squares[pacman.currentIndex].classList.add('pm-rotate180');
+                break;
+            case 1:
+                squares[pacman.currentIndex].classList.add('pm-rotate0');
+                break;
+        }
+        switch (dirY) {
+            case -1:
+                squares[pacman.currentIndex].classList.add('pm-rotate90');
+                break;
+            case 1:
+                squares[pacman.currentIndex].classList.add('pm-rotate270');
+                break;
+        }
 
-    //funcion moverghost
-    function moverGhost(ghost){
-        const directions=[-1,+1,width,-width]
-        let direction=directions[Math.floor(Math.random()*directions.length)]
 
-        ghost.timerId=setInterval(function(){
-            if(!squares[ghost.currentIndex+direction].classList.contains('wall')&&
-                !squares[ghost.currentIndex+direction].classList.contains('ghost')
-            )
-            {
-                // puede ir
-                //eliminar todos los fantasmas relacionados a la clase
-                squares[ghost.currentIndex].classList.remove(ghost.ClassName,'ghost','scared-ghost')
-                // cambiar currentindex a un nuevo cuadrado.
-                ghost.currentIndex+=direction;
-
-                //volver a dibujar el fantasma en el nuevo espacio
-                squares[ghost.currentIndex].classList.add(ghost.ClassName,'ghost');
-            }
-            else
-            {
-                direction=directions[Math.floor(Math.random()*directions.length)]
-            }
-
-            //si el fantasma esta dando grito
-            if(ghost.isScared){
-                squares[ghost.currentIndex].classList.add('scared-ghost');
-            }
-
-            // si el fantasma grita y pacmna corre en el
-            if(ghost.isScared && squares[ghost.currentIndex].classList.contains('pac-man'))
-            {
-                squares[ghost.currentIndex].classList.remove(ghost.ClassName,'ghost','scared-ghost');
-                ghost.currentIndex=ghost.startIndex;
-                score+=100;
-                squares[ghost.currentIndex].classList.add(ghost.ClassName,'ghost');
-            }
-            checkForGameOver();
-        },ghost.speed);
+        //llamada de funciones realizadas por pacman
+        pacmanComePuntos();
+        pacmanComeBolasPoder();
+        reviserParaGanar();
     }
 
-    // revisar para termnar el juego
-    function checkForGameOver()
+
+    //dibujar a pacman
+    squares[pacman.currentIndex].classList.add('pacman');
+
+    //dibujar a los fantasmas
+    ghosts.forEach(ghost => {
+        squares[ghost.currentIndex].classList.add(ghost.className);
+        squares[ghost.currentIndex].classList.add('fantasma');
+    });
+
+    //mover pacman
+    document.addEventListener('keyup',moverPacman);
+
+    //pacman come puntos
+    function pacmanComePuntos()
     {
-        if(squares[pacmanCurrentIndex].classList.contains('ghost')&&
-        !squares[pacmanCurrentIndex].classList.contains('scared-ghost')){
-            ghosts.forEach(ghost=>clearInterval(ghost.timerId));
-            document.removeEventListener('keyup',movePacman);
-        //     setTimeout(function(){alert('Game Over!')
-        // },500)
-        scoreDisplay.innerHTML='GAME OVER';
+        if(squares[pacman.currentIndex].classList.contains('puntos-pacman'))
+        {
+            score++;
+            scoreDisplay.innerHTML=score;
+            squares[pacman.currentIndex].classList.remove('puntos-pacman');
         }
     }
 
-    // revisar si gano el jueb=go
-    function checkForWin()
+    //Pacman come bolas de poder
+    function pacmanComeBolasPoder(){
+        if(squares[pacman.currentIndex].classList.contains('bola-poder'))
+        {
+            score+=10;
+            ghosts.forEach(ghost=>ghost.isScared=true);
+            setTimeout(fantasmasDejanGritar,10000);
+            squares[pacman.currentIndex].classList.remove('bola-poder');
+        }
+    }
+
+    // Los fantasmas realizan un grito
+    function fantasmasDejanGritar()
     {
-        if(score===264)
+        ghosts.forEach(ghost=>ghost.isScared=false);
+    }
+
+    //mover a los fantasmas
+    ghosts.forEach(ghost=>moverFantasmas(ghost));
+    function moverFantasmas(ghost)
+    {
+        const directions=[-1,+1,width,-width];
+        let direction=directions[Math.floor(Math.random()*directions.length)];
+
+        ghost.timerId=setInterval(function(){
+            if(!squares[ghost.currentIndex+direction].classList.contains('pared')&&
+                !squares[ghost.currentIndex+direction].classList.contains('fantasma'))
+            {
+                //eliminar la clase fantasma
+                squares[ghost.currentIndex].classList.remove(ghost.className,'fantasma','grito-fantasma');
+                //Revisar si es un camino cerrado
+                const [ghostX,ghostY]=ghost.obtenerCoordenadas();
+                const [pacmanX,pacmanY]=pacman.obtenerCoordenadas();
+                const [ghostNewX,ghostNewY]=ghost.obtenerCoordenadasNuevas(direction)
+
+                function estaCoordenadaXCerrado()
+                {
+                    if((ghostNewX-pacmanX)>(ghostY-pacmanY))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+
+                function estaCoordenadaYCerrado()
+                {
+                    if((ghostNewY-pacmanY)>(ghostY-pacmanY))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+
+                if(!estaCoordenadaXCerrado()||!estaCoordenadaYCerrado())
+                {
+                    ghost.currentIndex+=direction;
+                    squares[ghost.currentIndex].classList.add(ghost.className,'fantasma','grito-fantasma');
+                }
+                else
+                {
+                    squares[ghost.currentIndex].classList.add(ghost.className,'fantasma');
+                    direction=directions[Math.floor(Math.random()*directions.length)];
+                }
+                squares[ghost.currentIndex].classList.add(ghost.className,'fantasma');
+            }
+            else
+            {
+                direction=directions[Math.floor(Math.random()*directions.length)];
+            }
+
+            //el fantasma esta dando gritos
+            if(ghost.isScared)
+            {
+                squares[ghost.currentIndex].classList.remove(ghost.className,'fantasma','grito-fantasma');
+                squares[ghost.currentIndex].classList.add('grito-fantasma','fantasma');
+            }
+
+            if(ghost.isScared&&squares[ghost.currentIndex].classList.contains('pacman'))
+            {
+                squares[ghost.currentIndex].classList.remove(ghost.className,'fantasma','grito-fantasma');
+                ghost.currentIndex=ghost.startIndex;
+                score+=100;
+                squares[ghost.currentIndex].classList.add(ghost.className,'fantasma')
+            }
+
+            //detener el juego si pacman es comido por los fantasmas
+            if(squares[ghost.currentIndex].classList.contains('pacman'))
+            {
+                squares[ghost.currentIndex].classList.remove('pacman');
+                squares[pacman.currentIndex].classList.remove('pm-rotate0','pm-rotate90','pm-rotate180','pm-rotate270');
+                clearInterval(ghost.timerId);
+                scoreDisplay.innerHTML='PERDISTE!';
+                document.removeEventListener('keyup',moverPacman);
+            }
+        },ghost.speed);
+    }
+
+    function reviserParaGanar()
+    {
+        if(score>=336)
         {
             ghosts.forEach(ghost=>clearInterval(ghost.timerId));
-            document.removeEventListener('keyup',movePacman)
-            scoreDisplay.innerHTML='YOU WON!';
+            document.removeEventListener('keyup',moverPacman);
+            scoreDisplay.innerHTML='GANASTES';
         }
     }
 });
