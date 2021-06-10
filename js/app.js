@@ -35,6 +35,35 @@ document.addEventListener('DOMContentLoaded',()=>{
         1,0,1,1,1,1,0,1,1,0,1,0,1,1,1,1,0,1,0,1,1,0,1,1,1,1,0,1,
         1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,
         1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+        //Prueba
+        // ,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+        // 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+        // 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+        // 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+        // 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+        // 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+        // 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+        // 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+        // 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+        // 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+        // 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+        // 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+        // 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+        // 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+        // 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+        // 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+        // 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+        // 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+        // 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+        // 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+        // 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+        // 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+        // 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+        // 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+        // 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+        // 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+        // 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+        // 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
     ];
     //Leyenda de la pizarra
     // 0->puntos pacman
@@ -90,9 +119,9 @@ document.addEventListener('DOMContentLoaded',()=>{
         {
             return [this.currentIndex%width,Math.floor(this.currentIndex/width)];
         }
-        obtenerCoordenadasNuevas(direction)
+        obtenerCoordenadasNuevas(dir)
         {
-            return [(this.currentIndex+direction)%width,Math.floor((this.currentIndex+direction)/width)];
+            return [(this.currentIndex+dir)%width,Math.floor((this.currentIndex+dir)/width)];
         }
     }
     
@@ -116,7 +145,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         
     }
     // crear pacman
-    var pacman=new Pacman('pacman',473,500);
+    var pacman=new Pacman('pacman',449,500);
 
     function moverPacman(e) {
         squares[pacman.currentIndex].classList.remove('pacman');
@@ -149,7 +178,7 @@ document.addEventListener('DOMContentLoaded',()=>{
             case 39:
                 if(pacman.currentIndex%width<width-1 &&
                     !squares[pacman.currentIndex+1].classList.contains('pared')&&
-                    !squares[pacman.currentIndex+1].classList.contains('guaridad-fantasma'))
+                    !squares[pacman.currentIndex+1].classList.contains('guarida-fantasma'))
                     {
                         pacman.currentIndex+=1;
                     }
@@ -238,14 +267,16 @@ document.addEventListener('DOMContentLoaded',()=>{
 
     //mover a los fantasmas
     ghosts.forEach(ghost=>moverFantasmas(ghost));
+    
+    
     function moverFantasmas(ghost)
     {
         const directions=[-1,+1,width,-width];
-        let direction=directions[Math.floor(Math.random()*directions.length)];
-
+        var direction=directions[Math.floor(Math.random()*directions.length)];
+        
         ghost.timerId=setInterval(function(){
             if(!squares[ghost.currentIndex+direction].classList.contains('pared')&&
-                !squares[ghost.currentIndex+direction].classList.contains('fantasma'))
+            !squares[ghost.currentIndex+direction].classList.contains('fantasma'))
             {
                 //eliminar la clase fantasma
                 squares[ghost.currentIndex].classList.remove(ghost.className,'fantasma','grito-fantasma');
@@ -256,13 +287,13 @@ document.addEventListener('DOMContentLoaded',()=>{
 
                 function estaCoordenadaXCerrado()
                 {
-                    if((ghostNewX-pacmanX)>(ghostY-pacmanY))
+                    if((ghostNewX-pacmanX)>(ghostX-pacmanX))
                     {
-                        return true;
+                        return false;
                     }
                     else
                     {
-                        return false;
+                        return true;
                     }
                 }
 
@@ -270,23 +301,23 @@ document.addEventListener('DOMContentLoaded',()=>{
                 {
                     if((ghostNewY-pacmanY)>(ghostY-pacmanY))
                     {
-                        return true;
+                        return false;
                     }
                     else
                     {
-                        return false;
+                        return true;
                     }
                 }
 
-                if(!estaCoordenadaXCerrado()||!estaCoordenadaYCerrado())
+                if(estaCoordenadaXCerrado()||estaCoordenadaYCerrado())
                 {
                     ghost.currentIndex+=direction;
                     squares[ghost.currentIndex].classList.add(ghost.className,'fantasma','grito-fantasma');
                 }
                 else
                 {
-                    squares[ghost.currentIndex].classList.add(ghost.className,'fantasma');
                     direction=directions[Math.floor(Math.random()*directions.length)];
+                    squares[ghost.currentIndex].classList.add(ghost.className,'fantasma');
                 }
                 squares[ghost.currentIndex].classList.add(ghost.className,'fantasma');
             }
